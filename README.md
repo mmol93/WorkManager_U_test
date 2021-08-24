@@ -2,6 +2,7 @@
 
 * 강의 보고 배운 것을 복습하기 위해 만들었음
 * 참조한 부분은 https://github.com/mmol93/ViewModel_Udemy 의 WorkManager Branch임
+* 이 project는 BoilerPlate로 써도좋을거 같음(대부분 사용 방법이 일정하고 키워드만 바꾸면 쓸 수 있음)
 
 * #### WorkManager는 앱이 종료되었거나 기기가 다시 시작하더라도 다시 진행될 필요가 있는 백그라운드 작업에서 사용된다
 
