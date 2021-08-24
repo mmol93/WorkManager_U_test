@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.work.*
 import com.example.workmanager_u_test.databinding.ActivityMainBinding
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     companion object{
@@ -18,7 +19,8 @@ class MainActivity : AppCompatActivity() {
         binder = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binder.button.setOnClickListener {
-
+//            setOnTimeWorkRequest()
+            setPeriodicWorkRequest()
         }
     }
     // 해당 조건(Constraints 또는 다른 사용자 지정 조건)에 따라 한 번만 발동한다
@@ -86,5 +88,16 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
                 }
             })
+    }
+
+    private fun setPeriodicWorkRequest(){
+        // PeriodicWorkRequest의 경우 Builder에 Class 이외에 추가적인 매개변수가 필요하다
+        // repeatInterval: 얼마만큼의 시간으로 반복할 것인가(최소 15분 이상 간격 필요)
+        // TimeUnit: 시간의 단위를 결정한다
+        val periodicWorkRequest = PeriodicWorkRequest
+            .Builder(DownloadWorker::class.java, 16, TimeUnit.MINUTES)
+            .build()
+
+        WorkManager.getInstance(applicationContext).enqueue(periodicWorkRequest)
     }
 }
